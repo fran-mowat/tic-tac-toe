@@ -1,5 +1,6 @@
 let squares = document.getElementsByClassName("board-square")
 let square_contents = document.getElementsByClassName("board-text")
+let turn = "user"
 
 let set_square_contents = (e) => {
     e.target.innerHTML = "x"
@@ -119,6 +120,11 @@ let reset_board = () => {
         square_contents[i].innerHTML = ""
         square_contents[i].classList = "board-text" //resets class lists 
     } 
+    if (turn == "user"){
+        round("computer")
+    } else if (turn == "computer"){
+        round("user")
+    }
 }
 
 let board_click = () => {
@@ -143,8 +149,7 @@ let winner = (winner) => {
     //add event listener to get user click then reset board on click 
 }
 
-let round = () => {
-    let turn = "user"
+let round = (turn) => {
     if (turn == "user"){
         add_square_listeners()
     } else if (turn == "computer"){
@@ -152,4 +157,4 @@ let round = () => {
     }
 }
 
-round()
+round(turn)
