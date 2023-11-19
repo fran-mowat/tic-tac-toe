@@ -4,12 +4,15 @@ let square_contents = document.getElementsByClassName("board-text")
 let set_square_contents = (e) => {
     e.target.innerHTML = "x"
     e.target.classList.add("x")
+    remove_square_listeners()
+    setTimeout(computer_turn, 600) //delay computer move by 600ms
 }
 
 let add_square_listeners = () => {
     for (let i=0; i<squares.length; i++){
         squares[i].addEventListener("click", set_square_contents)
     }
+    squares[0].setAttribute("listener", "true")
 }
 
 let remove_square_listeners = () => {
@@ -52,5 +55,30 @@ let check_diagonals = () => {
     }
 }
 
-add_square_listeners()
-remove_square_listeners()
+let computer_turn = () => {
+    /*
+     * check if 2 in a row for computer 
+     * check if 2 in a row for user 
+     * look to make 2 in a row for computer 
+     * pick random square 
+     */
+    let valid_move = false
+    while (valid_move == false){
+        let choice = Math.floor(Math.random() * 9) //generating random number between 0 and 8 (inclusive)
+        if (square_contents[choice].innerHTML == ""){
+            square_contents[choice].innerHTML = "o"
+            square_contents[choice].classList.add("o")
+            valid_move = true 
+        }
+    }
+        
+}
+
+let round = () => {
+    let turn = "user"
+    if (turn == "user"){
+        add_square_listeners()
+    }
+}
+
+round()
