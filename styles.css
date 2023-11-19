@@ -1,0 +1,35 @@
+*{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body{
+    background-color: aliceblue;
+}
+
+#title-card{
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+#board{
+    margin: auto;
+    height: 460px;
+    width: 460px;
+    display: grid;
+    gap: 5px;
+    background-color: black;
+}
+
+.board-row{
+    display: grid;
+    gap: 5px;
+}
+
+.board-square{
+    height: 150px;
+    width: 150px;
+    background-color: aliceblue;
+    display: inline-grid;
+    grid-row-start: 1;
+}
