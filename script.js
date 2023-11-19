@@ -112,6 +112,20 @@ let check_board = () => {
     }
 }
 
+let reset_board = () => {
+    remove_square_listeners()
+    board.removeEventListener("click", reset_board)
+    for (let i=0; i<square_contents.length; i++){
+        square_contents[i].innerHTML = ""
+        square_contents[i].classList = "board-text" //resets class lists 
+    } 
+}
+
+let board_click = () => {
+    let board = document.getElementById("board")
+    board.addEventListener("click", reset_board)
+}
+
 let winner = (winner) => {
     if (winner == "user"){
         let user_score = document.getElementById("player-number")
@@ -123,7 +137,10 @@ let winner = (winner) => {
         let tie_score = document.getElementById("tie-number")
         tie_score.innerHTML = Number(tie_score.innerHTML) + 1
     }
-    //reset board 
+
+    setTimeout(board_click, 600) 
+
+    //add event listener to get user click then reset board on click 
 }
 
 let round = () => {
