@@ -48,3 +48,14 @@ body{
 .x{
     translate: 16% -24%;
 }
+
+#score-card{
+    display: flex;
+    margin: auto;
+    width: 400px;
+}
+
+#player-score, #tie-score, #computer-score{
+    flex: 1;
+    text-align: center;
+}
