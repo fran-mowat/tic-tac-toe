@@ -6,10 +6,8 @@ let set_square_contents = (e) => {
     e.target.innerHTML = "x"
     e.target.classList.add("x")
     remove_square_listeners()
-    if (check_board() == -1){
+    if (check_board() == -1){ //winner is not found on board 
         setTimeout(computer_turn, 600) //delay computer move by 600ms
-    } else {
-        console.log("winner detected.")
     }
 }
 
@@ -33,9 +31,11 @@ let remove_square_listeners = () => {
 let check_rows = () => {
     for (let i=0; i<9; i+=3){
         if (square_contents[i].innerHTML == "x" && square_contents[i+1].innerHTML == "x" && square_contents[i+2].innerHTML == "x"){
-            return "user" 
+            winner("user")
+            return 0
         } else if (square_contents[i].innerHTML == "o" && square_contents[i+1].innerHTML == "o" && square_contents[i+2].innerHTML == "o"){
-            return "computer"
+            winner("computer")
+            return 0
         } 
     }
     return -1
@@ -44,9 +44,11 @@ let check_rows = () => {
 let check_columns = () => {
     for (let i=0; i<3; i++){
         if (square_contents[i].innerHTML == "x" && square_contents[i+3].innerHTML == "x" && square_contents[i+6].innerHTML == "x"){
-            return "user" 
+            winner("user")
+            return 0
         } else if (square_contents[i].innerHTML == "o" && square_contents[i+3].innerHTML == "o" && square_contents[i+6].innerHTML == "o"){
-            return "computer"
+            winner("computer")
+            return 0
         }
     }
     return -1
@@ -54,13 +56,13 @@ let check_columns = () => {
 
 let check_diagonals = () => {
     if (square_contents[0].innerHTML == "x" && square_contents[4].innerHTML == "x" && square_contents[8].innerHTML == "x"){
-        return "user" 
+        winner("user") 
     } else if (square_contents[0].innerHTML == "o" && square_contents[4].innerHTML == "o" && square_contents[8].innerHTML == "o"){
-        return "computer"
+        winner("computer")
     } else if (square_contents[2].innerHTML == "x" && square_contents[4].innerHTML == "x" && square_contents[6].innerHTML == "x"){
-        return "user"
+        winner("user")
     } else if (square_contents[2].innerHTML == "o" && square_contents[4].innerHTML == "o" && square_contents[6].innerHTML == "o"){
-        return "computer"
+        winner("computer")
     } else {
         return -1
     }
@@ -82,15 +84,13 @@ let computer_turn = () => {
             valid_move = true 
         }
     }
-    if (check_board() == -1){
+    if (check_board() == -1){ //board is not in a winning position 
         add_square_listeners()
-    } else{
-        console.log("WINNER")
     }
 }
 
 let check_board = () => {
-    let row = check_rows()
+    row = check_rows()
     if (row == -1){
         columns = check_columns()
         if (columns == -1){
@@ -99,6 +99,16 @@ let check_board = () => {
                 return -1 //board is not in winning position 
             }
         } 
+    }
+}
+
+let winner = (winner) => {
+    if (winner == "user"){
+        let user_score = document.getElementById("player-number")
+        user_score.innerHTML = Number(user_score.innerHTML) + 1
+    } else if (winner == "computer"){
+        let computer_score = document.getElementById("computer-number")
+        computer_score.innerHTML = Number(computer_score.innerHTML) + 1
     }
 }
 
