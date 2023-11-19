@@ -37,7 +37,14 @@ body{
 .board-text{
     font-size: 200px;
     font-family: 'monospace', Arial, sans-serif;
-    translate: 10% -22%;
     height: auto;
     width: auto
+}
+
+.o{
+    translate: 14% -24%;
+}
+
+.x{
+    translate: 16% -24%;
 }
