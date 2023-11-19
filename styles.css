@@ -33,3 +33,11 @@ body{
     display: inline-grid;
     grid-row-start: 1;
 }
+
+.board-text{
+    font-size: 200px;
+    font-family: 'monospace', Arial, sans-serif;
+    translate: 10% -22%;
+    height: auto;
+    width: auto
+}
