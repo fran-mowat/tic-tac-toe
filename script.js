@@ -1,5 +1,6 @@
 let squares = document.getElementsByClassName("board-square")
 let square_contents = document.getElementsByClassName("board-text")
+let selected_squares = []
 
 let set_square_contents = (e) => {
     e.target.innerHTML = "x"
@@ -14,7 +15,12 @@ let set_square_contents = (e) => {
 
 let add_square_listeners = () => {
     for (let i=0; i<squares.length; i++){
-        squares[i].addEventListener("click", set_square_contents)
+        if ((!square_contents[i].classList.contains("o")) && (!square_contents[i].classList.contains("x"))){ //checking that the square does not already contain an element
+            squares[i].addEventListener("click", set_square_contents)
+        }
+    }
+    for (let i=0; i<selected_squares.length; i++){
+        squares[selected_squares[i]].removeEventListener("click", set_square_contents)
     }
 }
 
@@ -79,10 +85,8 @@ let computer_turn = () => {
     if (check_board() == -1){
         add_square_listeners()
     } else{
-        console("WINNER")
+        console.log("WINNER")
     }
-    
-        
 }
 
 let check_board = () => {
@@ -99,10 +103,8 @@ let check_board = () => {
 }
 
 let round = () => {
-    console.log("round entered")
-    let turn = "computer"
+    let turn = "user"
     if (turn == "user"){
-        console.log("t")
         add_square_listeners()
     } else if (turn == "computer"){
         computer_turn()
