@@ -1,6 +1,5 @@
 let squares = document.getElementsByClassName("board-square")
 let square_contents = document.getElementsByClassName("board-text")
-let selected_squares = []
 
 let set_square_contents = (e) => {
     e.target.innerHTML = "x"
@@ -16,9 +15,6 @@ let add_square_listeners = () => {
         if ((!square_contents[i].classList.contains("o")) && (!square_contents[i].classList.contains("x"))){ //checking that the square does not already contain an element
             squares[i].addEventListener("click", set_square_contents)
         }
-    }
-    for (let i=0; i<selected_squares.length; i++){
-        squares[selected_squares[i]].removeEventListener("click", set_square_contents)
     }
 }
 
@@ -89,6 +85,16 @@ let computer_turn = () => {
     }
 }
 
+let draw_status = () => {
+    for (let i=0; i<squares.length; i++){
+        if (!((square_contents[i].innerHTML == "x") || (square_contents[i].innerHTML == "o"))){
+            return -1 //the board is not full
+        }
+    }
+    winner("draw")
+    return "draw" //all board squares are filled  
+}
+
 let check_board = () => {
     row = check_rows()
     if (row == -1){
@@ -96,7 +102,11 @@ let check_board = () => {
         if (columns == -1){
             diagonals = check_diagonals()
             if (diagonals == -1){
-                return -1 //board is not in winning position 
+                draw = draw_status()
+                if (draw == -1){
+                    return -1 //board is not in winning position and board is not filled 
+                }
+                
             }
         } 
     }
@@ -109,7 +119,11 @@ let winner = (winner) => {
     } else if (winner == "computer"){
         let computer_score = document.getElementById("computer-number")
         computer_score.innerHTML = Number(computer_score.innerHTML) + 1
+    } else if (winner == "draw"){
+        let tie_score = document.getElementById("tie-number")
+        tie_score.innerHTML = Number(tie_score.innerHTML) + 1
     }
+    //reset board 
 }
 
 let round = () => {
