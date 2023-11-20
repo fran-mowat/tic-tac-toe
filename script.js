@@ -1,6 +1,6 @@
 let squares = document.getElementsByClassName("board-square")
 let square_contents = document.getElementsByClassName("board-text")
-let turn = "user"
+let round_number = 0
 
 let set_square_contents = (e) => {
     e.target.innerHTML = "x"
@@ -120,11 +120,7 @@ let reset_board = () => {
         square_contents[i].innerHTML = ""
         square_contents[i].classList = "board-text" //resets class lists 
     } 
-    if (turn == "user"){
-        round("computer")
-    } else if (turn == "computer"){
-        round("user")
-    }
+    round(round_number)
 }
 
 let board_click = () => {
@@ -149,12 +145,19 @@ let winner = (winner) => {
     //add event listener to get user click then reset board on click 
 }
 
-let round = (turn) => {
-    if (turn == "user"){
+let round = (round) => {
+    if (round % 2 == 0){ //user turn 
+        round_number += 1 //global variable 
         add_square_listeners()
-    } else if (turn == "computer"){
+    } else { //computer turn 
+        round_number += 1
         computer_turn()
     }
 }
 
-round(turn)
+round(0)
+
+/**
+ * make computer guesses intelligent as listed within the function 
+ * fix draw scoring system 
+*/
