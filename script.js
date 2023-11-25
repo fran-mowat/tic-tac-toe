@@ -68,7 +68,6 @@ let check_diagonals = () => {
 let computer_move = (i) => {
     let move_made = false  
     if (square_contents[i].innerHTML == ""){
-        console.log(i)
         square_contents[i].innerHTML = "o"
         square_contents[i].classList.add("o")
         move_made = true 
@@ -79,19 +78,16 @@ let computer_move = (i) => {
 let two_column_check = (symbol) => {
     for (let i = 0; i<3; i++){
         if ((square_contents[i].innerHTML == symbol) && (square_contents[i+3].innerHTML == symbol)){
-            console.log("enter if", i)
             if (computer_move(i+6)){
                 return true 
             }
         }
         else if ((square_contents[i].innerHTML == symbol) && (square_contents[i+6].innerHTML == symbol)){
-            console.log("enter if", i)
             if (computer_move(i+3)){
                 return true 
             }
         }
         else if ((square_contents[i+3].innerHTML == symbol) && (square_contents[i+6].innerHTML == symbol)){
-            console.log("enter if", i)
             if (computer_move(i)){
                 return true 
             }
@@ -102,19 +98,16 @@ let two_column_check = (symbol) => {
 let two_row_check = (symbol) => {
     for (let i=0; i<9; i+=3){
         if ((square_contents[i].innerHTML == symbol) && (square_contents[i+1].innerHTML == symbol)){
-            console.log("row entered", i)
             if (computer_move(i+2)){
                 return true 
             }
         }
         else if ((square_contents[i].innerHTML == symbol) && (square_contents[i+2].innerHTML == symbol)){
-            console.log("row entered", i)
             if (computer_move(i+1)){
                 return true 
             }
         }
         else if ((square_contents[i+1].innerHTML == symbol) && (square_contents[i+2].innerHTML == symbol)){
-            console.log("row entered", i)
             if (computer_move(i)){
                 return true 
             }
@@ -124,47 +117,48 @@ let two_row_check = (symbol) => {
 
 let two_diagonal_check = (symbol) => {
     if ((square_contents[0].innerHTML == symbol) && (square_contents[4].innerHTML == symbol)){
-        console.log("diagonal entered")
             if (computer_move(8)){
                 return true 
             }
     }
     else if ((square_contents[0].innerHTML == symbol) && (square_contents[8].innerHTML == symbol)){
-        console.log("diagonal entered")
             if (computer_move(4)){
                 return true 
             }
     }
     else if ((square_contents[4].innerHTML == symbol) && (square_contents[8].innerHTML == symbol)){
-        console.log("diagonal entered")
             if (computer_move(0)){
                 return true 
             }
     }
     else if ((square_contents[2].innerHTML == symbol) && (square_contents[4].innerHTML == symbol)){
-        console.log("diagonal entered")
             if (computer_move(6)){
                 return true 
             }
     }
     else if ((square_contents[2].innerHTML == symbol) && (square_contents[6].innerHTML == symbol)){
-        console.log("diagonal entered")
             if (computer_move(4)){
                 return true 
             }
     }
     else if ((square_contents[4].innerHTML == symbol) && (square_contents[6].innerHTML == symbol)){
-        console.log("diagonal entered")
             if (computer_move(2)){
                 return true 
             }
     }
 }
 
+let check_empty = () => {
+    for (let i=0; i<9; i++){
+        if (! square_contents[i].innerHTML == ""){
+            return false
+        }
+    }
+    return true 
+}
+
 let computer_turn = () => {
     /*
-     * check if 2 in a row for computer 
-     * check if 2 in a row for user 
      * look to make 2 in a row for computer 
      * pick random square 
      */
@@ -204,14 +198,19 @@ let computer_turn = () => {
             valid_move = true
         }
     }
-
-    while (valid_move == false){
-        let choice = Math.floor(Math.random() * 9) //generating random number between 0 and 8 (inclusive)
-        if (square_contents[choice].innerHTML == ""){
-            square_contents[choice].innerHTML = "o"
-            square_contents[choice].classList.add("o")
-            valid_move = true 
+    if (check_empty() == true){
+        while (valid_move == false){
+            let choice = Math.floor(Math.random() * 9) //generating random number between 0 and 8 (inclusive)
+            if (square_contents[choice].innerHTML == ""){
+                square_contents[choice].innerHTML = "o"
+                square_contents[choice].classList.add("o")
+                valid_move = true 
+            }
         }
+    } else {
+        //look to make two in a row for the computer 
+        //double_xs()
+        console.log("double up xs")
     }
 
     if (check_board() == -1){ //board is not in a winning position 
