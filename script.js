@@ -122,6 +122,45 @@ let two_row_check = (symbol) => {
     }
 }
 
+let two_diagonal_check = (symbol) => {
+    if ((square_contents[0].innerHTML == symbol) && (square_contents[4].innerHTML == symbol)){
+        console.log("diagonal entered")
+            if (computer_move(8)){
+                return true 
+            }
+    }
+    else if ((square_contents[0].innerHTML == symbol) && (square_contents[8].innerHTML == symbol)){
+        console.log("diagonal entered")
+            if (computer_move(4)){
+                return true 
+            }
+    }
+    else if ((square_contents[4].innerHTML == symbol) && (square_contents[8].innerHTML == symbol)){
+        console.log("diagonal entered")
+            if (computer_move(0)){
+                return true 
+            }
+    }
+    else if ((square_contents[2].innerHTML == symbol) && (square_contents[4].innerHTML == symbol)){
+        console.log("diagonal entered")
+            if (computer_move(6)){
+                return true 
+            }
+    }
+    else if ((square_contents[2].innerHTML == symbol) && (square_contents[6].innerHTML == symbol)){
+        console.log("diagonal entered")
+            if (computer_move(4)){
+                return true 
+            }
+    }
+    else if ((square_contents[4].innerHTML == symbol) && (square_contents[6].innerHTML == symbol)){
+        console.log("diagonal entered")
+            if (computer_move(2)){
+                return true 
+            }
+    }
+}
+
 let computer_turn = () => {
     /*
      * check if 2 in a row for computer 
@@ -143,6 +182,12 @@ let computer_turn = () => {
     }
 
     if (valid_move == false){
+        if (two_diagonal_check("o") == true){
+            valid_move = true
+        }
+    }
+
+    if (valid_move == false){
         if (two_column_check("x") == true){
             valid_move = true 
         }
@@ -151,6 +196,12 @@ let computer_turn = () => {
     if (valid_move == false){
         if (two_row_check("x") == true){
             valid_move = true 
+        }
+    }
+
+    if (valid_move == false){
+        if (two_diagonal_check("x") == true){
+            valid_move = true
         }
     }
 
