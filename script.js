@@ -78,9 +78,44 @@ let computer_move = (i) => {
 
 let two_column_check = (symbol) => {
     for (let i = 0; i<3; i++){
-        if (((square_contents[i].innerHTML == symbol) && (square_contents[i+3].innerHTML == symbol)) || ((square_contents[i].innerHTML == symbol) && (square_contents[i+6].innerHTML == symbol)) || ((square_contents[i+3].innerHTML == symbol) && (square_contents[i+6].innerHTML == symbol))){
+        if ((square_contents[i].innerHTML == symbol) && (square_contents[i+3].innerHTML == symbol)){
             console.log("enter if", i)
             if (computer_move(i+6)){
+                return true 
+            }
+        }
+        else if ((square_contents[i].innerHTML == symbol) && (square_contents[i+6].innerHTML == symbol)){
+            console.log("enter if", i)
+            if (computer_move(i+3)){
+                return true 
+            }
+        }
+        else if ((square_contents[i+3].innerHTML == symbol) && (square_contents[i+6].innerHTML == symbol)){
+            console.log("enter if", i)
+            if (computer_move(i)){
+                return true 
+            }
+        }
+    }
+}
+
+let two_row_check = (symbol) => {
+    for (let i=0; i<9; i+=3){
+        if ((square_contents[i].innerHTML == symbol) && (square_contents[i+1].innerHTML == symbol)){
+            console.log("row entered", i)
+            if (computer_move(i+2)){
+                return true 
+            }
+        }
+        else if ((square_contents[i].innerHTML == symbol) && (square_contents[i+2].innerHTML == symbol)){
+            console.log("row entered", i)
+            if (computer_move(i+1)){
+                return true 
+            }
+        }
+        else if ((square_contents[i+1].innerHTML == symbol) && (square_contents[i+2].innerHTML == symbol)){
+            console.log("row entered", i)
+            if (computer_move(i)){
                 return true 
             }
         }
@@ -99,10 +134,22 @@ let computer_turn = () => {
 
     if (two_column_check("o") == true){
         valid_move = true
-    } 
+    }
+
+    if (valid_move == false){
+        if (two_row_check("o") == true){
+            valid_move = true
+        }
+    }
 
     if (valid_move == false){
         if (two_column_check("x") == true){
+            valid_move = true 
+        }
+    }
+
+    if (valid_move == false){
+        if (two_row_check("x") == true){
             valid_move = true 
         }
     }
