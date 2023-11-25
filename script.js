@@ -101,6 +101,12 @@ let computer_turn = () => {
         valid_move = true
     } 
 
+    if (valid_move == false){
+        if (two_column_check("x") == true){
+            valid_move = true 
+        }
+    }
+
     while (valid_move == false){
         let choice = Math.floor(Math.random() * 9) //generating random number between 0 and 8 (inclusive)
         if (square_contents[choice].innerHTML == ""){
