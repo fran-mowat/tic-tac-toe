@@ -65,6 +65,28 @@ let check_diagonals = () => {
     }
 }
 
+let computer_move = (i) => {
+    let move_made = false  
+    if (square_contents[i].innerHTML == ""){
+        console.log(i)
+        square_contents[i].innerHTML = "o"
+        square_contents[i].classList.add("o")
+        move_made = true 
+    }
+    return move_made
+}
+
+let two_column_check = (symbol) => {
+    for (let i = 0; i<3; i++){
+        if (((square_contents[i].innerHTML == symbol) && (square_contents[i+3].innerHTML == symbol)) || ((square_contents[i].innerHTML == symbol) && (square_contents[i+6].innerHTML == symbol)) || ((square_contents[i+3].innerHTML == symbol) && (square_contents[i+6].innerHTML == symbol))){
+            console.log("enter if", i)
+            if (computer_move(i+6)){
+                return true 
+            }
+        }
+    }
+}
+
 let computer_turn = () => {
     /*
      * check if 2 in a row for computer 
@@ -72,7 +94,13 @@ let computer_turn = () => {
      * look to make 2 in a row for computer 
      * pick random square 
      */
+    
     let valid_move = false
+
+    if (two_column_check("o") == true){
+        valid_move = true
+    } 
+
     while (valid_move == false){
         let choice = Math.floor(Math.random() * 9) //generating random number between 0 and 8 (inclusive)
         if (square_contents[choice].innerHTML == ""){
@@ -81,6 +109,7 @@ let computer_turn = () => {
             valid_move = true 
         }
     }
+
     if (check_board() == -1){ //board is not in a winning position 
         add_square_listeners()
     }
@@ -159,5 +188,4 @@ round(0)
 
 /**
  * make computer guesses intelligent as listed within the function 
- * fix draw scoring system 
 */
