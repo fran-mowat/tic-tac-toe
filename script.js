@@ -1,9 +1,7 @@
 let squares = document.getElementsByClassName("board-square")
-let square_contents = document.getElementsByClassName("board-text")
 let round_number = 0
 
 let set_square_contents = (e) => {
-    e.target.innerHTML = "×"
     e.target.classList.add("×")
     remove_square_listeners()
     if (check_board() == -1){ //winner is not found on board 
@@ -13,7 +11,7 @@ let set_square_contents = (e) => {
 
 let add_square_listeners = () => {
     for (let i=0; i<squares.length; i++){
-        if ((!square_contents[i].classList.contains("⚬")) && (!square_contents[i].classList.contains("×"))){ //checking that the square does not already contain an element
+        if ((!squares[i].classList.contains("⚬")) && (!squares[i].classList.contains("×"))){ //checking that the square does not already contain an element
             squares[i].addEventListener("click", set_square_contents)
         }
     }
@@ -27,10 +25,10 @@ let remove_square_listeners = () => {
 
 let check_rows = () => {
     for (let i=0; i<9; i+=3){
-        if (square_contents[i].innerHTML == "×" && square_contents[i+1].innerHTML == "×" && square_contents[i+2].innerHTML == "×"){
+        if (squares[i].classList.contains("×") && squares[i+1].classList.contains("×") && squares[i+2].classList.contains("×")){
             winner("user")
             return 0
-        } else if (square_contents[i].innerHTML == "⚬" && square_contents[i+1].innerHTML == "⚬" && square_contents[i+2].innerHTML == "⚬"){
+        } else if (squares[i].classList.contains("⚬") && squares[i+1].classList.contains("⚬") && squares[i+2].classList.contains("⚬")){
             winner("computer")
             return 0
         } 
@@ -40,10 +38,10 @@ let check_rows = () => {
 
 let check_columns = () => {
     for (let i=0; i<3; i++){
-        if (square_contents[i].innerHTML == "×" && square_contents[i+3].innerHTML == "×" && square_contents[i+6].innerHTML == "×"){
+        if (squares[i].classList.contains("×") && squares[i+3].classList.contains("×") && squares[i+6].classList.contains("×")){
             winner("user")
             return 0
-        } else if (square_contents[i].innerHTML == "⚬" && square_contents[i+3].innerHTML == "⚬" && square_contents[i+6].innerHTML == "⚬"){
+        } else if (squares[i].classList.contains("⚬") && squares[i+3].classList.contains("⚬") && squares[i+6].classList.contains("⚬")){
             winner("computer")
             return 0
         }
@@ -52,13 +50,13 @@ let check_columns = () => {
 }
 
 let check_diagonals = () => {
-    if (square_contents[0].innerHTML == "×" && square_contents[4].innerHTML == "×" && square_contents[8].innerHTML == "×"){
+    if (squares[0].classList.contains("×") && squares[4].classList.contains("×") && squares[8].classList.contains("×")){
         winner("user") 
-    } else if (square_contents[0].innerHTML == "⚬" && square_contents[4].innerHTML == "⚬" && square_contents[8].innerHTML == "⚬"){
+    } else if (squares[0].classList.contains("⚬") && squares[4].classList.contains("⚬") && squares[8].classList.contains("⚬")){
         winner("computer")
-    } else if (square_contents[2].innerHTML == "×" && square_contents[4].innerHTML == "×" && square_contents[6].innerHTML == "×"){
+    } else if (squares[2].classList.contains("×") && squares[4].classList.contains("×") && squares[6].classList.contains("×")){
         winner("user")
-    } else if (square_contents[2].innerHTML == "⚬" && square_contents[4].innerHTML == "⚬" && square_contents[6].innerHTML == "⚬"){
+    } else if (squares[2].classList.contains("⚬") && squares[4].classList.contains("⚬") && squares[6].classList.contains("⚬")){
         winner("computer")
     } else {
         return -1
@@ -67,9 +65,8 @@ let check_diagonals = () => {
 
 let computer_move = (i) => {
     let move_made = false  
-    if (square_contents[i].innerHTML == ""){
-        square_contents[i].innerHTML = "⚬"
-        square_contents[i].classList.add("⚬")
+    if (squares[i].classList == "board-square"){
+        squares[i].classList.add("⚬")
         move_made = true 
     }
     return move_made
@@ -77,17 +74,17 @@ let computer_move = (i) => {
 
 let two_column_check = (symbol) => {
     for (let i = 0; i<3; i++){
-        if ((square_contents[i].innerHTML == symbol) && (square_contents[i+3].innerHTML == symbol)){
+        if ((squares[i].classList.contains(symbol)) && (squares[i+3].classList.contains(symbol))){
             if (computer_move(i+6)){
                 return true 
             }
         }
-        else if ((square_contents[i].innerHTML == symbol) && (square_contents[i+6].innerHTML == symbol)){
+        else if ((squares[i].classList.contains(symbol)) && (squares[i+6].classList.contains(symbol))){
             if (computer_move(i+3)){
                 return true 
             }
         }
-        else if ((square_contents[i+3].innerHTML == symbol) && (square_contents[i+6].innerHTML == symbol)){
+        else if ((squares[i+3].classList.contains(symbol)) && (squares[i+6].classList.contains(symbol))){
             if (computer_move(i)){
                 return true 
             }
@@ -97,17 +94,17 @@ let two_column_check = (symbol) => {
 
 let two_row_check = (symbol) => {
     for (let i=0; i<9; i+=3){
-        if ((square_contents[i].innerHTML == symbol) && (square_contents[i+1].innerHTML == symbol)){
+        if ((squares[i].classList.contains(symbol)) && (squares[i+1].classList.contains(symbol))){
             if (computer_move(i+2)){
                 return true 
             }
         }
-        else if ((square_contents[i].innerHTML == symbol) && (square_contents[i+2].innerHTML == symbol)){
+        else if ((squares[i].classList.contains(symbol)) && (squares[i+2].classList.contains(symbol))){
             if (computer_move(i+1)){
                 return true 
             }
         }
-        else if ((square_contents[i+1].innerHTML == symbol) && (square_contents[i+2].innerHTML == symbol)){
+        else if ((squares[i+1].classList.contains(symbol)) && (squares[i+2].classList.contains(symbol))){
             if (computer_move(i)){
                 return true 
             }
@@ -116,32 +113,32 @@ let two_row_check = (symbol) => {
 }
 
 let two_diagonal_check = (symbol) => {
-    if ((square_contents[0].innerHTML == symbol) && (square_contents[4].innerHTML == symbol)){
+    if ((squares[0].classList.contains(symbol)) && (squares[4].classList.contains(symbol))){
             if (computer_move(8)){
                 return true 
             }
     }
-    else if ((square_contents[0].innerHTML == symbol) && (square_contents[8].innerHTML == symbol)){
+    else if ((squares[0].classList.contains(symbol)) && (squares[8].classList.contains(symbol))){
             if (computer_move(4)){
                 return true 
             }
     }
-    else if ((square_contents[4].innerHTML == symbol) && (square_contents[8].innerHTML == symbol)){
+    else if ((squares[4].classList.contains(symbol)) && (squares[8].classList.contains(symbol))){
             if (computer_move(0)){
                 return true 
             }
     }
-    else if ((square_contents[2].innerHTML == symbol) && (square_contents[4].innerHTML == symbol)){
+    else if ((squares[2].classList.contains(symbol)) && (squares[4].classList.contains(symbol))){
             if (computer_move(6)){
                 return true 
             }
     }
-    else if ((square_contents[2].innerHTML == symbol) && (square_contents[6].innerHTML == symbol)){
+    else if ((squares[2].classList.contains(symbol)) && (squares[6].classList.contains(symbol))){
             if (computer_move(4)){
                 return true 
             }
     }
-    else if ((square_contents[4].innerHTML == symbol) && (square_contents[6].innerHTML == symbol)){
+    else if ((squares[4].classList.contains(symbol)) && (squares[6].classList.contains(symbol))){
             if (computer_move(2)){
                 return true 
             }
@@ -150,7 +147,7 @@ let two_diagonal_check = (symbol) => {
 
 let check_empty = () => {
     for (let i=0; i<9; i++){
-        if (! (square_contents[i].innerHTML == "" || square_contents[i].innerHTML == "×")){
+        if (! (squares[i].classList == "board-square" || squares[i].classList.contains("×"))){
             return false
         }
     }
@@ -183,7 +180,7 @@ let find_adjacent = (i) => {
 
 let double_xs = () => {
     for (let i=0; i<9; i++){
-        if (square_contents[i].innerHTML == "⚬"){
+        if (squares[i].classList.contains("⚬")){
             adjacent = find_adjacent(i) //returns list of adjacent squares to i
             for (let j = 0; j < adjacent.length; j++){
                 val = adjacent[j] //iterating through adjacent list
@@ -251,9 +248,8 @@ let computer_turn = () => {
 
     while (valid_move == false){
         let choice = Math.floor(Math.random() * 9) //generating random number between 0 and 8 (inclusive)
-        if (square_contents[choice].innerHTML == ""){
-            square_contents[choice].innerHTML = "⚬"
-            square_contents[choice].classList.add("⚬")
+        if (squares[choice].classList == "board-square"){
+            squares[choice].classList.add("⚬")
             valid_move = true 
         }
     }
@@ -265,7 +261,7 @@ let computer_turn = () => {
 
 let draw_status = () => {
     for (let i=0; i<squares.length; i++){
-        if (!((square_contents[i].innerHTML == "×") || (square_contents[i].innerHTML == "⚬"))){
+        if (!((squares[i].classList.contains("×")) || (squares[i].classList.contains("⚬")))){
             return -1 //the board is not full
         }
     }
@@ -293,9 +289,9 @@ let check_board = () => {
 let reset_board = () => {
     remove_square_listeners()
     board.removeEventListener("click", reset_board)
-    for (let i=0; i<square_contents.length; i++){
-        square_contents[i].innerHTML = ""
-        square_contents[i].classList = "board-text" //resets class lists 
+    for (let i=0; i<squares.length; i++){
+        squares[i].classList.remove("×") //resets class lists 
+        squares[i].classList.remove("⚬")
     } 
     round(round_number)
 }
