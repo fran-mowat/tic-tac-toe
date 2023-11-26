@@ -184,25 +184,25 @@ let find_adjacent = (i) => {
 let double_xs = () => {
     for (let i=0; i<9; i++){
         if (square_contents[i].innerHTML == "o"){
-            console.log("i", i)
-            adjacent = find_adjacent(i)
-            console.log("adjacent", adjacent)
+            adjacent = find_adjacent(i) //returns list of adjacent squares to i
             for (let j = 0; j < adjacent.length; j++){
-                val = adjacent[j]
-                console.log(val)
+                val = adjacent[j] //iterating through adjacent list
                 if (computer_move(val)){
                     return true 
                 }
             }
         }
     }
-    console.log("passed for loop")
+    return false 
 }
 
 let computer_turn = () => {
     /*
-     * look to make 2 in a row for computer 
-     * pick random square 
+     * computer 'intelligent' move rules:
+    - looks to make 3 in a row for computer 
+    - looks to stop 3 in a row for user 
+    - looks to make 2 in a row for computer 
+    - selects a random square  
      */
     
     let valid_move = false
@@ -240,21 +240,21 @@ let computer_turn = () => {
             valid_move = true
         }
     }
+
     if (valid_move == false){
-        if (check_empty() == true){
-            console.log("random move made")
-            while (valid_move == false){
-                let choice = Math.floor(Math.random() * 9) //generating random number between 0 and 8 (inclusive)
-                if (square_contents[choice].innerHTML == ""){
-                    square_contents[choice].innerHTML = "o"
-                    square_contents[choice].classList.add("o")
-                    valid_move = true 
-                }
+        if (check_empty() == false){
+            if (double_xs() == true){ //looks to make two in a row for the computer 
+                valid_move = true 
             }
-        } else {
-            //look to make two in a row for the computer 
-            console.log("double up xs")
-            double_xs()
+        }
+    }
+
+    while (valid_move == false){
+        let choice = Math.floor(Math.random() * 9) //generating random number between 0 and 8 (inclusive)
+        if (square_contents[choice].innerHTML == ""){
+            square_contents[choice].innerHTML = "o"
+            square_contents[choice].classList.add("o")
+            valid_move = true 
         }
     }
 
