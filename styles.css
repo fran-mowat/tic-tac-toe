@@ -39,16 +39,15 @@ body{
     font-size: 200px;
     font-family: 'monospace', Arial, sans-serif;
     height: auto;
-    width: auto
+    width: auto;
 }
 
 .⚬{
-    translate: 11% -36%;
-    font-size: 250px;
+    background-image: url(./images/white-circle-svg.svg);
 }
 
 .×{
-    translate: 11% -16%;
+    background-image: url(./images/white-cross-svg.svg);
 }
 
 #score-card{
