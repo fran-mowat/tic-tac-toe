@@ -150,11 +150,53 @@ let two_diagonal_check = (symbol) => {
 
 let check_empty = () => {
     for (let i=0; i<9; i++){
-        if (! square_contents[i].innerHTML == ""){
+        if (! (square_contents[i].innerHTML == "" || square_contents[i].innerHTML == "x")){
             return false
         }
     }
     return true 
+}
+
+let find_adjacent = (i) => {
+    if (i == 0){
+        return [1,3]
+    } else if (i == 1){
+        return [0, 1, 2]
+    } else if (i == 2){
+        return [1, 5]
+    } else if (i == 3){
+        return [0, 4, 6]
+    } else if (i == 4){
+        return [1, 3, 5, 7]
+    } else if (i == 5){
+        return [2, 4, 8]
+    } else if (i == 6){
+        return [3, 7]
+    } else if (i == 7){
+        return [4, 6, 8]
+    } else if (i == 8){
+        return [5, 7]
+    } else{
+        return "number outside valid range 0-8"
+    }
+}
+
+let double_xs = () => {
+    for (let i=0; i<9; i++){
+        if (square_contents[i].innerHTML == "o"){
+            console.log("i", i)
+            adjacent = find_adjacent(i)
+            console.log("adjacent", adjacent)
+            for (let j = 0; j < adjacent.length; j++){
+                val = adjacent[j]
+                console.log(val)
+                if (computer_move(val)){
+                    return true 
+                }
+            }
+        }
+    }
+    console.log("passed for loop")
 }
 
 let computer_turn = () => {
@@ -198,19 +240,22 @@ let computer_turn = () => {
             valid_move = true
         }
     }
-    if (check_empty() == true){
-        while (valid_move == false){
-            let choice = Math.floor(Math.random() * 9) //generating random number between 0 and 8 (inclusive)
-            if (square_contents[choice].innerHTML == ""){
-                square_contents[choice].innerHTML = "o"
-                square_contents[choice].classList.add("o")
-                valid_move = true 
+    if (valid_move == false){
+        if (check_empty() == true){
+            console.log("random move made")
+            while (valid_move == false){
+                let choice = Math.floor(Math.random() * 9) //generating random number between 0 and 8 (inclusive)
+                if (square_contents[choice].innerHTML == ""){
+                    square_contents[choice].innerHTML = "o"
+                    square_contents[choice].classList.add("o")
+                    valid_move = true 
+                }
             }
+        } else {
+            //look to make two in a row for the computer 
+            console.log("double up xs")
+            double_xs()
         }
-    } else {
-        //look to make two in a row for the computer 
-        //double_xs()
-        console.log("double up xs")
     }
 
     if (check_board() == -1){ //board is not in a winning position 
