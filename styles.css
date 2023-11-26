@@ -1,9 +1,10 @@
 *{
     font-family: 'Courier New', Courier, monospace;
+    color: white;
 }
 
 body{
-    background-color: aliceblue;
+    background-color: rgb(0, 0, 0);
 }
 
 #title-card{
@@ -18,7 +19,7 @@ body{
     width: 460px;
     display: grid;
     gap: 5px;
-    background-color: black;
+    background-color: rgb(255, 255, 255);
 }
 
 .board-row{
@@ -29,7 +30,7 @@ body{
 .board-square{
     height: 150px;
     width: 150px;
-    background-color: aliceblue;
+    background-color: rgb(0, 0, 0);
     display: inline-grid;
     grid-row-start: 1;
 }
