@@ -331,5 +331,5 @@ let round = (round) => {
 round(0)
 
 /**
- * make computer guesses intelligent as listed within the function 
+ * make winning row/column/diagonal flash on win 
 */
