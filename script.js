@@ -1,4 +1,5 @@
 let squares = document.getElementsByClassName("board-square")
+let board = document.getElementById("board")
 let round_number = 0
 
 let set_square_contents = (e) => {
@@ -114,35 +115,40 @@ let two_row_check = (symbol) => {
 
 let two_diagonal_check = (symbol) => {
     if ((squares[0].classList.contains(symbol)) && (squares[4].classList.contains(symbol))){
-            if (computer_move(8)){
-                return true 
-            }
+        if (computer_move(8)){
+            return true 
+        }
     }
     else if ((squares[0].classList.contains(symbol)) && (squares[8].classList.contains(symbol))){
-            if (computer_move(4)){
-                return true 
-            }
+        if (computer_move(4)){
+            return true 
+        }
     }
     else if ((squares[4].classList.contains(symbol)) && (squares[8].classList.contains(symbol))){
-            if (computer_move(0)){
-                return true 
-            }
+        if (computer_move(0)){
+            return true 
+        }
     }
-    else if ((squares[2].classList.contains(symbol)) && (squares[4].classList.contains(symbol))){
-            if (computer_move(6)){
+    else if ((squares[2].classList.contains(symbol)) && (squares[4].classList.contains(symbol))){    
+        if (computer_move(6)){
                 return true 
             }
     }
     else if ((squares[2].classList.contains(symbol)) && (squares[6].classList.contains(symbol))){
-            if (computer_move(4)){
-                return true 
-            }
+        if (computer_move(4)){
+            return true 
+        }
     }
     else if ((squares[4].classList.contains(symbol)) && (squares[6].classList.contains(symbol))){
-            if (computer_move(2)){
-                return true 
-            }
+        if (computer_move(2)){
+            return true 
+        }
     }
+    else if ((squares[4].classList.contains(symbol)) && (squares[6].classList.contains(symbol))){
+        if (computer_move(2)){
+            return true 
+        }
+}
 }
 
 let check_empty = () => {
@@ -311,11 +317,26 @@ let winner = (winner) => {
     } else if (winner == "draw"){
         let tie_score = document.getElementById("tie-number")
         tie_score.innerHTML = Number(tie_score.innerHTML) + 1
+        winner_flash("draw")
     }
 
     setTimeout(board_click, 600) 
 
     //add event listener to get user click then reset board on click 
+}
+
+let change_colour = () => {
+    if (board.style.backgroundColor == "white"){
+        board.style.backgroundColor = "rgb(180, 180, 180)"
+    } else{
+        board.style.backgroundColor = "white"
+    }
+}
+
+let winner_flash = (winner) => {
+    if (winner == "draw"){
+        setInterval(change_colour, 300)
+    }
 }
 
 let round = (round) => {
