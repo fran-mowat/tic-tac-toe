@@ -327,7 +327,7 @@ let winner = (winner) => {
 
 let change_colour = () => {
     if (board.style.backgroundColor == "white"){
-        board.style.backgroundColor = "rgb(180, 180, 180)"
+        board.style.backgroundColor = "rgb(150, 150, 150)"
     } else{
         board.style.backgroundColor = "white"
     }
@@ -335,7 +335,10 @@ let change_colour = () => {
 
 let winner_flash = (winner) => {
     if (winner == "draw"){
-        setInterval(change_colour, 300)
+        i = setInterval(change_colour, 200)
+        setTimeout(function() {clearInterval(i)
+        }, 1200)
+        board.style.backgroundColor = "white"
     }
 }
 
