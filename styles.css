@@ -19,7 +19,7 @@ body{
     width: 460px;
     display: grid;
     gap: 5px;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
 }
 
 .board-row{
