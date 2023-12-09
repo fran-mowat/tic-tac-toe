@@ -6,7 +6,7 @@ let set_square_contents = (e) => {
     e.target.classList.add("×")
     remove_square_listeners()
     if (check_board() == -1){ //winner is not found on board 
-        setTimeout(computer_turn, 600) //delay computer move by 600ms
+        setTimeout(computer_turn, 400) //delay computer move by 600ms
     }
 }
 
@@ -327,7 +327,7 @@ let winner = (winner) => {
 
 let change_colour = () => {
     if (board.style.backgroundColor == "white"){
-        board.style.backgroundColor = "rgb(150, 150, 150)"
+        board.style.backgroundColor = "rgb(50, 50, 50)"
     } else{
         board.style.backgroundColor = "white"
     }
