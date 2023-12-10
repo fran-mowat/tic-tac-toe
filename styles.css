@@ -59,8 +59,22 @@ body{
     margin-top: 2px;
 }
 
-#player-score, #tie-score, #computer-score{
+#player-score, #tie-score, #computer-score, #game-mode{
     flex: 1;
     text-align: center;
     font-weight: 500;
+}
+
+#game-mode #logo{
+    width: 50px;
+    height: 50px;
+    padding-top: 20px;
+    margin: auto;
+    background-image: url(./images/dual-player.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#game-mode p{
+    margin: 0px;
 }
