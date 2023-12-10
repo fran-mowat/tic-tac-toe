@@ -413,6 +413,12 @@ let switch_mode = () => {
         mode.classList.remove("two-player")
         mode.classList.add("one-player")
         mode.children[1].innerHTML = "1P"
+
+        computer_score.style.color = "#8a8a8a"
+        document.getElementById("computer-score").children[1].style.color = "#8a8a8a"
+
+        document.getElementById("tie-score").children[0].style.color = "#8a8a8a"
+        document.getElementById("tie-score").children[1].style.color = "#8a8a8a"
         
     } else{ //swapping into 1P mode 
         player_score.innerHTML = "PLAYER"
@@ -420,6 +426,12 @@ let switch_mode = () => {
         mode.classList.remove("one-player")
         mode.classList.add("two-player")
         mode.children[1].innerHTML = "2P"
+
+        computer_score.style.color = "white"
+        document.getElementById("computer-score").children[1].style.color = "white"
+
+        document.getElementById("tie-score").children[0].style.color = "white"
+        document.getElementById("tie-score").children[1].style.color = "white"
     }
 }
 
