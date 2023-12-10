@@ -397,6 +397,22 @@ let round = (round) => {
     }
 }
 
+let switch_mode = () => {
+    reset_board()
+    document.getElementById("player-number").innerHTML = 0
+    document.getElementById("tie-number").innerHTML = 0
+    document.getElementById("computer-number").innerHTML = 0
+
+    if (document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){
+        document.getElementById("player-score").firstElementChild.innerHTML = "PLAYER 1 (X)"
+        document.getElementById("computer-score").firstElementChild.innerHTML = "PLAYER 2 (O)"
+    } else{
+        document.getElementById("player-score").firstElementChild.innerHTML = "PLAYER"
+        document.getElementById("computer-score").firstElementChild.innerHTML = "COMPUTER"
+
+    }
+}
+
 round(0)
 
 /**
