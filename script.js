@@ -403,13 +403,23 @@ let switch_mode = () => {
     document.getElementById("tie-number").innerHTML = 0
     document.getElementById("computer-number").innerHTML = 0
 
-    if (document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){
-        document.getElementById("player-score").firstElementChild.innerHTML = "PLAYER 1 (X)"
-        document.getElementById("computer-score").firstElementChild.innerHTML = "PLAYER 2 (O)"
-    } else{
-        document.getElementById("player-score").firstElementChild.innerHTML = "PLAYER"
-        document.getElementById("computer-score").firstElementChild.innerHTML = "COMPUTER"
+    let player_score = document.getElementById("player-score").firstElementChild
+    let computer_score = document.getElementById("computer-score").firstElementChild
+    let mode = document.getElementById("game-mode")
 
+    if (document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //swapping into 2P mode
+        player_score.innerHTML = "PLAYER 1 (X)"
+        computer_score.innerHTML = "PLAYER 2 (O)"
+        mode.classList.remove("two-player")
+        mode.classList.add("one-player")
+        mode.children[1].innerHTML = "1P"
+        
+    } else{ //swapping into 1P mode 
+        player_score.innerHTML = "PLAYER"
+        computer_score.innerHTML = "COMPUTER"
+        mode.classList.remove("one-player")
+        mode.classList.add("two-player")
+        mode.children[1].innerHTML = "2P"
     }
 }
 
