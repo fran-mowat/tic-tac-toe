@@ -54,15 +54,19 @@ body{
 #score-card{
     display: flex;
     margin: auto;
-    width: 400px;
+    width: 600px;
     font-size: 20px;
     margin-top: 2px;
 }
 
-#player-score, #tie-score, #computer-score, #game-mode{
+#player-score, #tie-score, #computer-score, #game-mode, #empty-centre{
     flex: 1;
     text-align: center;
     font-weight: 500;
+}
+
+#game-mode, #empty-centre{
+    width: 110px
 }
 
 #game-mode:hover #logo{
