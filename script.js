@@ -410,8 +410,8 @@ let switch_mode = () => {
     if (document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //swapping into 2P mode
         player_score.innerHTML = "PLAYER 1 (X)"
         computer_score.innerHTML = "PLAYER 2 (O)"
-        mode.classList.remove("two-player")
-        mode.classList.add("one-player")
+        mode.classList.remove("one-player")
+        mode.classList.add("two-player")
         mode.children[1].innerHTML = "1P"
 
         computer_score.style.color = "#8a8a8a"
@@ -423,8 +423,8 @@ let switch_mode = () => {
     } else{ //swapping into 1P mode 
         player_score.innerHTML = "PLAYER"
         computer_score.innerHTML = "COMPUTER"
-        mode.classList.remove("one-player")
-        mode.classList.add("two-player")
+        mode.classList.remove("two-player")
+        mode.classList.add("one-player")
         mode.children[1].innerHTML = "2P"
 
         computer_score.style.color = "white"
