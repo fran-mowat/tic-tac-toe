@@ -69,11 +69,11 @@ body{
     width: 110px
 }
 
-.two-player:hover #logo{
+.one-player:hover #logo{
     background-image: url(./images/dual-player.svg);
 }
 
-.one-player:hover #logo{
+.two-player:hover #logo{
     background-image: url(./images/single-player.svg);
 }
 
@@ -90,11 +90,11 @@ body{
     background-position: center;
 }
 
-.two-player #logo{
+.one-player #logo{
     background-image: url(./images/dual-player-grey.svg);
 }
 
-.one-player #logo{
+.two-player #logo{
     background-image: url(./images/single-player-grey.svg);
 }
 
