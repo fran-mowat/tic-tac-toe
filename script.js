@@ -27,10 +27,10 @@ let remove_square_listeners = () => {
 let check_rows = () => {
     for (let i=0; i<9; i+=3){
         if (squares[i].classList.contains("×") && squares[i+1].classList.contains("×") && squares[i+2].classList.contains("×")){
-            winner("user")
+            winner("user", i, i+1, i+2)
             return 0
         } else if (squares[i].classList.contains("⚬") && squares[i+1].classList.contains("⚬") && squares[i+2].classList.contains("⚬")){
-            winner("computer")
+            winner("computer", i, i+1, i+2)
             return 0
         } 
     }
@@ -40,10 +40,10 @@ let check_rows = () => {
 let check_columns = () => {
     for (let i=0; i<3; i++){
         if (squares[i].classList.contains("×") && squares[i+3].classList.contains("×") && squares[i+6].classList.contains("×")){
-            winner("user")
+            winner("user", i, i+3, i+6)
             return 0
         } else if (squares[i].classList.contains("⚬") && squares[i+3].classList.contains("⚬") && squares[i+6].classList.contains("⚬")){
-            winner("computer")
+            winner("computer", i, i+3, i+6)
             return 0
         }
     }
@@ -52,13 +52,13 @@ let check_columns = () => {
 
 let check_diagonals = () => {
     if (squares[0].classList.contains("×") && squares[4].classList.contains("×") && squares[8].classList.contains("×")){
-        winner("user") 
+        winner("user", 0, 4, 8) 
     } else if (squares[0].classList.contains("⚬") && squares[4].classList.contains("⚬") && squares[8].classList.contains("⚬")){
-        winner("computer")
+        winner("computer", 0, 4, 8)
     } else if (squares[2].classList.contains("×") && squares[4].classList.contains("×") && squares[6].classList.contains("×")){
-        winner("user")
+        winner("user", 2, 4, 6)
     } else if (squares[2].classList.contains("⚬") && squares[4].classList.contains("⚬") && squares[6].classList.contains("⚬")){
-        winner("computer")
+        winner("computer", 2, 4, 6)
     } else {
         return -1
     }
@@ -288,7 +288,7 @@ let check_board = () => {
                 }
                 
             }
-        } 
+        }
     }
 }
 
@@ -307,13 +307,15 @@ let board_click = () => {
     board.addEventListener("click", reset_board)
 }
 
-let winner = (winner) => {
+let winner = (winner, pos1=0, pos2=0, pos3=0) => {
     if (winner == "user"){
         let user_score = document.getElementById("player-number")
         user_score.innerHTML = Number(user_score.innerHTML) + 1
+        winner_flash("user", pos1, pos2, pos3)
     } else if (winner == "computer"){
         let computer_score = document.getElementById("computer-number")
         computer_score.innerHTML = Number(computer_score.innerHTML) + 1
+        winner_flash("computer", pos1, pos2, pos3)
     } else if (winner == "draw"){
         let tie_score = document.getElementById("tie-number")
         tie_score.innerHTML = Number(tie_score.innerHTML) + 1
@@ -333,12 +335,21 @@ let change_colour = () => {
     }
 }
 
-let winner_flash = (winner) => {
+let winner_flash = (winner, pos1=0, pos2=0, pos3=0) => {
     if (winner == "draw"){
         i = setInterval(change_colour, 200)
         setTimeout(function() {clearInterval(i)
         }, 1200)
         board.style.backgroundColor = "white"
+    } else if (winner == "user"){
+            console.log(squares[pos1])
+            squares[pos1].style.backgroundImage = 'url("./images/grey-cross.svg")'
+            squares[pos2].style.backgroundImage = 'url("./images/grey-cross.svg")'
+            squares[pos3].style.backgroundImage = 'url("./images/grey-cross.svg")'
+    } else if (winner == "computer"){
+            squares[pos1].style.backgroundImage = 'url("./images/grey-circle.svg")'
+            squares[pos2].style.backgroundImage = 'url("./images/grey-circle.svg")'
+            squares[pos3].style.backgroundImage = 'url("./images/grey-circle.svg")'
     }
 }
 
