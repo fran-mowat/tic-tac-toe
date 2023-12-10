@@ -65,16 +65,25 @@ body{
     font-weight: 500;
 }
 
+#game-mode:hover #logo{
+    background-image: url(./images/dual-player.svg);
+}
+
+#game-mode:hover p{
+    color: white;
+}
+
 #game-mode #logo{
     width: 50px;
     height: 50px;
     padding-top: 20px;
     margin: auto;
-    background-image: url(./images/dual-player.svg);
+    background-image: url(./images/dual-player-grey.svg);
     background-repeat: no-repeat;
     background-position: center;
 }
 
 #game-mode p{
     margin: 0px;
+    color: #8a8a8a;
 }
