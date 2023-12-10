@@ -437,6 +437,3 @@ let switch_mode = () => {
 
 round(0)
 
-/**
- * make winning row/column/diagonal flash on win 
-*/
