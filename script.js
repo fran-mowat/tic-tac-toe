@@ -298,6 +298,7 @@ let reset_board = () => {
     for (let i=0; i<squares.length; i++){
         squares[i].classList.remove("×") //resets class lists 
         squares[i].classList.remove("⚬")
+        squares[i].style.backgroundImage = ""
     } 
     round(round_number)
 }
