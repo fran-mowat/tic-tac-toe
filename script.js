@@ -383,7 +383,7 @@ let winner_flash = (winner, pos1=0, pos2=0, pos3=0) => {
             squares[pos1].style.backgroundImage = 'url("./images/white-circle-svg.svg")'
             squares[pos2].style.backgroundImage = 'url("./images/white-circle-svg.svg")'
             squares[pos3].style.backgroundImage = 'url("./images/white-circle-svg.svg")'
-        }, 2000)
+        }, 1200)
     }
 }
 
