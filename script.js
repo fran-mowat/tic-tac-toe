@@ -335,6 +335,32 @@ let change_colour = () => {
     }
 }
 
+let change_cross_colour = (pos1, pos2, pos3) => {
+    console.log(pos1, pos2, pos3)
+    if (squares[pos1].style.backgroundImage == 'url("./images/grey-cross.svg")'){
+        squares[pos1].style.backgroundImage = 'url("./images/white-cross.svg")'
+        squares[pos2].style.backgroundImage = 'url("./images/white-cross.svg")'
+        squares[pos3].style.backgroundImage = 'url("./images/white-cross.svg")'
+    } else{
+        squares[pos1].style.backgroundImage = 'url("./images/grey-cross.svg")'
+        squares[pos2].style.backgroundImage = 'url("./images/grey-cross.svg")'
+        squares[pos3].style.backgroundImage = 'url("./images/grey-cross.svg")'
+    }
+}
+
+let change_circle_colour = (pos1, pos2, pos3) => {
+    console.log(pos1, pos2, pos3)
+    if (squares[pos1].style.backgroundImage == 'url("./images/grey-circle.svg")'){
+        squares[pos1].style.backgroundImage = 'url("./images/white-circle.svg")'
+        squares[pos2].style.backgroundImage = 'url("./images/white-circle.svg")'
+        squares[pos3].style.backgroundImage = 'url("./images/white-circle.svg")'
+    } else{
+        squares[pos1].style.backgroundImage = 'url("./images/grey-circle.svg")'
+        squares[pos2].style.backgroundImage = 'url("./images/grey-circle.svg")'
+        squares[pos3].style.backgroundImage = 'url("./images/grey-circle.svg")'
+    }
+}
+
 let winner_flash = (winner, pos1=0, pos2=0, pos3=0) => {
     if (winner == "draw"){
         i = setInterval(change_colour, 200)
@@ -342,14 +368,19 @@ let winner_flash = (winner, pos1=0, pos2=0, pos3=0) => {
         }, 1200)
         board.style.backgroundColor = "white"
     } else if (winner == "user"){
-            console.log(squares[pos1])
-            squares[pos1].style.backgroundImage = 'url("./images/grey-cross.svg")'
-            squares[pos2].style.backgroundImage = 'url("./images/grey-cross.svg")'
-            squares[pos3].style.backgroundImage = 'url("./images/grey-cross.svg")'
+        i = setInterval(change_cross_colour, 200, pos1, pos2, pos3)
+        setTimeout(function() {clearInterval(i)
+        }, 1200)
+        squares[pos1].style.backgroundImage = 'url("./images/white-cross.svg")'
+        squares[pos2].style.backgroundImage = 'url("./images/white-cross.svg")'
+        squares[pos3].style.backgroundImage = 'url("./images/white-cross.svg")'
     } else if (winner == "computer"){
-            squares[pos1].style.backgroundImage = 'url("./images/grey-circle.svg")'
-            squares[pos2].style.backgroundImage = 'url("./images/grey-circle.svg")'
-            squares[pos3].style.backgroundImage = 'url("./images/grey-circle.svg")'
+        i = setInterval(change_circle_colour, 200, pos1, pos2, pos3)
+        setTimeout(function() {clearInterval(i)
+        }, 1200)
+        squares[pos1].style.backgroundImage = 'url("./images/white-circle.svg")'
+        squares[pos2].style.backgroundImage = 'url("./images/white-circle.svg")'
+        squares[pos3].style.backgroundImage = 'url("./images/white-circle.svg")'
     }
 }
 
