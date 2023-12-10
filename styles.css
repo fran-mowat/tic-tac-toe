@@ -1,5 +1,5 @@
 *{
-    font-family: 'Courier New', Courier, monospace;
+    font-family: monospace, 'math';
     color: white;
 }
 
@@ -9,8 +9,9 @@ body{
 
 #title-card{
     text-align: center;
-    margin-top: 40px;
-    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    font-size: 20px;
 }
 
 #board{
@@ -55,9 +56,11 @@ body{
     margin: auto;
     width: 400px;
     font-size: 20px;
+    margin-top: 2px;
 }
 
 #player-score, #tie-score, #computer-score{
     flex: 1;
     text-align: center;
+    font-weight: 500;
 }
