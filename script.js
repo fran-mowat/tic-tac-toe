@@ -4,7 +4,7 @@ let round_number = 0
 let player_turn = 0
 
 let set_square_contents = (e) => {
-    e.target.classList.add("×")
+    e.target.className = "board-square ×"
     remove_square_listeners(set_square_contents)
     if (check_board() == -1 && document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //winner is not found on board 
         setTimeout(computer_turn, 400) //delay computer move by 600ms
@@ -14,7 +14,7 @@ let set_square_contents = (e) => {
 }
 
 let set_player2_square = (e) => {
-    e.target.classList.add("⚬")
+    e.target.className = "board-square ⚬"
     remove_square_listeners(set_player2_square)
     if (check_board() == -1){ //winner is not found on board 
         player1_turn()
@@ -306,7 +306,6 @@ let check_board = () => {
 }
 
 let reset_board = () => {
-    console.log("reset complete.")
     remove_square_listeners(set_square_contents)
     remove_square_listeners(set_player2_square)
 
@@ -315,7 +314,6 @@ let reset_board = () => {
         squares[i].className = "board-square"
         squares[i].style.backgroundImage = ""
     }
-    console.log(squares)
     check_turn()
 }
 
