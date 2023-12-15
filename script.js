@@ -1,12 +1,23 @@
 let squares = document.getElementsByClassName("board-square")
 let board = document.getElementById("board")
 let round_number = 0
+let player_turn = 0
 
 let set_square_contents = (e) => {
     e.target.classList.add("×")
     remove_square_listeners(set_square_contents)
     if (check_board() == -1 && document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //winner is not found on board 
         setTimeout(computer_turn, 400) //delay computer move by 600ms
+    } else{
+        player2_turn()
+    }
+}
+
+let set_player2_square = (e) => {
+    e.target.classList.add("⚬")
+    remove_square_listeners(set_player2_square)
+    if (check_board() == -1){ //winner is not found on board 
+        player1_turn()
     }
 }
 
@@ -390,29 +401,38 @@ let winner_flash = (winner, pos1=0, pos2=0, pos3=0) => {
     }
 }
 
-let two_player = () => {
-    player_turn = 0
+let player1_turn = () => {
     let player1_score = document.getElementById("player-score").children
     let player2_score = document.getElementById("computer-score").children
 
+    player1_score[0].style.color = "white"
+    player1_score[1].style.color = "white"
+
+    player2_score[0].style.color = "#8a8a8a"
+    player2_score[0].style.color = "#8a8a8a"
+
+    add_square_listeners(set_square_contents)
+}
+
+let player2_turn = () => {
+    let player1_score = document.getElementById("player-score").children
+    let player2_score = document.getElementById("computer-score").children
+
+    player2_score[0].style.color = "white"
+    player2_score[1].style.color = "white"
+
+    player1_score[0].style.color = "#8a8a8a"
+    player1_score[0].style.color = "#8a8a8a"
+
+    add_square_listeners(set_player2_square)
+}
+
+let two_player = () => {
+    player_turn += 1
     if (player_turn % 2 == 0){
-        player_turn += 1
-        player1_score[0].style.color = "white"
-        player1_score[1].style.color = "white"
-
-        player2_score[0].style.color = "#8a8a8a"
-        player2_score[0].style.color = "#8a8a8a"
-        //set turn for x 
-
+        player1_turn()
     } else {
-        player_turn += 1
-        player2_score[0].style.color = "white"
-        player2_score[1].style.color = "white"
-
-        player1_score[0].style.color = "#8a8a8a"
-        player1_score[0].style.color = "#8a8a8a"
-        
-        //set turn for o 
+        player2_turn() 
     }
 }
 
@@ -457,6 +477,8 @@ let switch_mode = () => {
         document.getElementById("tie-score").children[0].style.color = "#8a8a8a"
         document.getElementById("tie-score").children[1].style.color = "#8a8a8a"
         
+        player_turn = 0 
+
     } else{ //swapping into 1P mode 
         player_score.innerHTML = "PLAYER"
         computer_score.innerHTML = "COMPUTER"
