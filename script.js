@@ -446,7 +446,7 @@ let round = () => {
         player_turn_1P()
     } else { //computer turn 
         round_number += 1
-        computer_turn()
+        setTimeout(computer_turn, 400)
     }
 }
 
