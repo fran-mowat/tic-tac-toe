@@ -5,7 +5,7 @@ let round_number = 0
 let set_square_contents = (e) => {
     e.target.classList.add("×")
     remove_square_listeners()
-    if (check_board() == -1){ //winner is not found on board 
+    if (check_board() == -1 && document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //winner is not found on board 
         setTimeout(computer_turn, 400) //delay computer move by 600ms
     }
 }
@@ -66,7 +66,7 @@ let check_diagonals = () => {
 
 let computer_move = (i) => {
     let move_made = false  
-    if (squares[i].classList == "board-square"){
+    if (squares[i].classList == "board-square" && document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){
         squares[i].classList.add("⚬")
         move_made = true 
     }
@@ -208,60 +208,63 @@ let computer_turn = () => {
     - selects a random square  
      */
     
-    let valid_move = false
+    console.log(document.getElementById("player-score").firstElementChild.innerHTML)
+    if (document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){
+        let valid_move = false
 
-    if (two_column_check("⚬") == true){
-        valid_move = true
-    }
-
-    if (valid_move == false){
-        if (two_row_check("⚬") == true){
+        if (two_column_check("⚬") == true){
             valid_move = true
         }
-    }
 
-    if (valid_move == false){
-        if (two_diagonal_check("⚬") == true){
-            valid_move = true
+        if (valid_move == false){
+            if (two_row_check("⚬") == true){
+                valid_move = true
+            }
         }
-    }
 
-    if (valid_move == false){
-        if (two_column_check("×") == true){
-            valid_move = true 
+        if (valid_move == false){
+            if (two_diagonal_check("⚬") == true){
+                valid_move = true
+            }
         }
-    }
 
-    if (valid_move == false){
-        if (two_row_check("×") == true){
-            valid_move = true 
-        }
-    }
-
-    if (valid_move == false){
-        if (two_diagonal_check("×") == true){
-            valid_move = true
-        }
-    }
-
-    if (valid_move == false){
-        if (check_empty() == false){
-            if (double_xs() == true){ //looks to make two in a row for the computer 
+        if (valid_move == false){
+            if (two_column_check("×") == true){
                 valid_move = true 
             }
         }
-    }
 
-    while (valid_move == false){
-        let choice = Math.floor(Math.random() * 9) //generating random number between 0 and 8 (inclusive)
-        if (squares[choice].classList == "board-square"){
-            squares[choice].classList.add("⚬")
-            valid_move = true 
+        if (valid_move == false){
+            if (two_row_check("×") == true){
+                valid_move = true 
+            }
         }
-    }
 
-    if (check_board() == -1){ //board is not in a winning position 
-        add_square_listeners()
+        if (valid_move == false){
+            if (two_diagonal_check("×") == true){
+                valid_move = true
+            }
+        }
+
+        if (valid_move == false){
+            if (check_empty() == false){
+                if (double_xs() == true){ //looks to make two in a row for the computer 
+                    valid_move = true 
+                }
+            }
+        }
+
+        while (valid_move == false){
+            let choice = Math.floor(Math.random() * 9) //generating random number between 0 and 8 (inclusive)
+            if (squares[choice].classList == "board-square"){
+                squares[choice].classList.add("⚬")
+                valid_move = true 
+            }
+        }
+
+        if (check_board() == -1 && document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //board is not in a winning position 
+            add_square_listeners()
+        }
     }
 }
 
@@ -299,8 +302,8 @@ let reset_board = () => {
         squares[i].classList.remove("×") //resets class lists 
         squares[i].classList.remove("⚬")
         squares[i].style.backgroundImage = ""
-    } 
-    round(round_number)
+    }
+    check_turn()
 }
 
 let board_click = () => {
@@ -420,6 +423,14 @@ let round = () => {
     } else { //computer turn 
         round_number += 1
         computer_turn()
+    }
+}
+
+let check_turn = () => {
+    if (document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //in 1P mode 
+        round()
+    } else { //in 2P mode 
+        console.log("2P mode")
     }
 }
 
