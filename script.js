@@ -436,10 +436,14 @@ let two_player = () => {
     }
 }
 
+let player_turn_1P = () => {
+    add_square_listeners(set_square_contents)
+}
+
 let round = () => {
     if (round_number % 2 == 0){ //user turn 
         round_number += 1 //global variable 
-        add_square_listeners(set_square_contents)
+        player_turn_1P()
     } else { //computer turn 
         round_number += 1
         computer_turn()
