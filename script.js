@@ -4,23 +4,23 @@ let round_number = 0
 
 let set_square_contents = (e) => {
     e.target.classList.add("×")
-    remove_square_listeners()
+    remove_square_listeners(set_square_contents)
     if (check_board() == -1 && document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //winner is not found on board 
         setTimeout(computer_turn, 400) //delay computer move by 600ms
     }
 }
 
-let add_square_listeners = () => {
+let add_square_listeners = (event_listener) => {
     for (let i=0; i<squares.length; i++){
         if ((!squares[i].classList.contains("⚬")) && (!squares[i].classList.contains("×"))){ //checking that the square does not already contain an element
-            squares[i].addEventListener("click", set_square_contents)
+            squares[i].addEventListener("click", event_listener)
         }
     }
 }
 
-let remove_square_listeners = () => {
+let remove_square_listeners = (event_listener) => {
     for (let i=0; i<squares.length; i++){
-        squares[i].removeEventListener("click", set_square_contents)
+        squares[i].removeEventListener("click", event_listener)
     }
 }
 
@@ -263,7 +263,7 @@ let computer_turn = () => {
         }
 
         if (check_board() == -1 && document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //board is not in a winning position 
-            add_square_listeners()
+            add_square_listeners(set_square_contents)
         }
     }
 }
@@ -419,7 +419,7 @@ let two_player = () => {
 let round = () => {
     if (round_number % 2 == 0){ //user turn 
         round_number += 1 //global variable 
-        add_square_listeners()
+        add_square_listeners(set_square_contents)
     } else { //computer turn 
         round_number += 1
         computer_turn()
