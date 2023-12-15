@@ -413,8 +413,8 @@ let two_player = () => {
     }
 }
 
-let round = (round) => {
-    if (round % 2 == 0){ //user turn 
+let round = () => {
+    if (round_number % 2 == 0){ //user turn 
         round_number += 1 //global variable 
         add_square_listeners()
     } else { //computer turn 
@@ -461,9 +461,9 @@ let switch_mode = () => {
         document.getElementById("tie-score").children[1].style.color = "white"
 
         round_number = 0
-        round(round_number)
+        round()
     }
 }
 
-round(0)
+round()
 
