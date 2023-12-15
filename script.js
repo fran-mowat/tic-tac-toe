@@ -7,7 +7,7 @@ let set_square_contents = (e) => {
     e.target.className = "board-square ×"
     remove_square_listeners(set_square_contents)
     if (check_board() == -1 && document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //winner is not found on board 
-        setTimeout(computer_turn, 400) //delay computer move by 600ms
+        setTimeout(computer_turn, 400) //delay computer move by 400ms
     } else{
         player2_turn()
     }
@@ -478,7 +478,7 @@ let switch_mode = () => {
         document.getElementById("tie-score").children[0].style.color = "#8a8a8a"
         document.getElementById("tie-score").children[1].style.color = "#8a8a8a"
         
-        player1_turn()
+        setTimeout(player1_turn, 200)
         player_turn = 0 
 
     } else{ //swapping into 1P mode 
@@ -496,7 +496,7 @@ let switch_mode = () => {
         document.getElementById("tie-score").children[1].style.color = "white"
 
         round_number = 0
-        round()
+        setTimeout(round, 200)
     }
 }
 
