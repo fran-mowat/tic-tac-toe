@@ -423,6 +423,7 @@ let switch_mode = () => {
     } else{ //swapping into 1P mode 
         player_score.innerHTML = "PLAYER"
         computer_score.innerHTML = "COMPUTER"
+       
         mode.classList.remove("two-player")
         mode.classList.add("one-player")
         mode.children[1].innerHTML = "2P"
@@ -432,6 +433,9 @@ let switch_mode = () => {
 
         document.getElementById("tie-score").children[0].style.color = "white"
         document.getElementById("tie-score").children[1].style.color = "white"
+
+        round_number = 0
+        round(round_number)
     }
 }
 
