@@ -387,6 +387,32 @@ let winner_flash = (winner, pos1=0, pos2=0, pos3=0) => {
     }
 }
 
+let two_player = () => {
+    player_turn = 0
+    let player1_score = document.getElementById("player-score").children
+    let player2_score = document.getElementById("computer-score").children
+
+    if (player_turn % 2 == 0){
+        player_turn += 1
+        player1_score[0].style.color = "white"
+        player1_score[1].style.color = "white"
+
+        player2_score[0].style.color = "#8a8a8a"
+        player2_score[0].style.color = "#8a8a8a"
+        //set turn for x 
+
+    } else {
+        player_turn += 1
+        player2_score[0].style.color = "white"
+        player2_score[1].style.color = "white"
+
+        player1_score[0].style.color = "#8a8a8a"
+        player1_score[0].style.color = "#8a8a8a"
+        
+        //set turn for o 
+    }
+}
+
 let round = (round) => {
     if (round % 2 == 0){ //user turn 
         round_number += 1 //global variable 
