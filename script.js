@@ -468,7 +468,7 @@ let switch_mode = () => {
     let computer_score = document.getElementById("computer-score").firstElementChild
     let mode = document.getElementById("game-mode")
 
-    if (document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //swapping into 2P mode
+    if (player_score.innerHTML == "PLAYER"){ //swapping into 2P mode
         player_score.innerHTML = "PLAYER 1 (X)"
         computer_score.innerHTML = "PLAYER 2 (O)"
         mode.classList.remove("one-player")
@@ -494,6 +494,9 @@ let switch_mode = () => {
 
         document.getElementById("tie-score").children[0].style.color = "white"
         document.getElementById("tie-score").children[1].style.color = "white"
+
+        player_score.style.color = "white"
+        document.getElementById("player-score").children[1].style.color = "white"
 
         round_number = 0
         setTimeout(round, 200)
