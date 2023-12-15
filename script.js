@@ -164,11 +164,11 @@ let two_diagonal_check = (symbol) => {
 
 let check_empty = () => {
     for (let i=0; i<9; i++){
-        if (! (squares[i].classList == "board-square" || squares[i].classList.contains("×"))){
-            return false
+        if (squares[i].classList.contains("×")){
+            return false //board is not empty 
         }
     }
-    return true 
+    return true //board is empty 
 }
 
 let find_adjacent = (i) => {
@@ -257,7 +257,7 @@ let computer_turn = () => {
         }
 
         if (valid_move == false){
-            if (check_empty() == false){
+            if (check_empty() == false){ //checks that there is at least 1 computer piece on the board  
                 if (double_xs() == true){ //looks to make two in a row for the computer 
                     valid_move = true 
                 }
@@ -273,7 +273,7 @@ let computer_turn = () => {
         }
 
         if (check_board() == -1 && document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //board is not in a winning position 
-            add_square_listeners(set_square_contents)
+            player_turn_1P()
         }
     }
 }
@@ -306,14 +306,16 @@ let check_board = () => {
 }
 
 let reset_board = () => {
+    console.log("reset complete.")
     remove_square_listeners(set_square_contents)
     remove_square_listeners(set_player2_square)
 
     board.removeEventListener("click", reset_board)
     for (let i=0; i<squares.length; i++){
-        squares[i].classList = "board-square"
+        squares[i].className = "board-square"
         squares[i].style.backgroundImage = ""
     }
+    console.log(squares)
     check_turn()
 }
 
