@@ -307,7 +307,9 @@ let check_board = () => {
 }
 
 let reset_board = () => {
-    remove_square_listeners()
+    remove_square_listeners(set_square_contents)
+    remove_square_listeners(set_player2_square)
+    
     board.removeEventListener("click", reset_board)
     for (let i=0; i<squares.length; i++){
         squares[i].classList.remove("×") //resets class lists 
