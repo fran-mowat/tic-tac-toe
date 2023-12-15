@@ -450,7 +450,7 @@ let check_turn = () => {
     if (document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //in 1P mode 
         round()
     } else { //in 2P mode 
-        console.log("2P mode")
+        two_player()
     }
 }
 
