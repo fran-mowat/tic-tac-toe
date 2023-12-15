@@ -313,6 +313,7 @@ let reset_board = () => {
         squares[i].classList.remove("×") //resets class lists 
         squares[i].classList.remove("⚬")
         squares[i].style.backgroundImage = ""
+        console.log(squares[i].classList)
     }
     check_turn()
 }
@@ -471,12 +472,10 @@ let switch_mode = () => {
         mode.classList.add("two-player")
         mode.children[1].innerHTML = "1P"
 
-        computer_score.style.color = "#8a8a8a"
-        document.getElementById("computer-score").children[1].style.color = "#8a8a8a"
-
         document.getElementById("tie-score").children[0].style.color = "#8a8a8a"
         document.getElementById("tie-score").children[1].style.color = "#8a8a8a"
         
+        player1_turn()
         player_turn = 0 
 
     } else{ //swapping into 1P mode 
