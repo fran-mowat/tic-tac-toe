@@ -219,7 +219,6 @@ let computer_turn = () => {
     - selects a random square  
      */
     
-    console.log(document.getElementById("player-score").firstElementChild.innerHTML)
     if (document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){
         let valid_move = false
 
@@ -309,13 +308,12 @@ let check_board = () => {
 let reset_board = () => {
     remove_square_listeners(set_square_contents)
     remove_square_listeners(set_player2_square)
-    
+
     board.removeEventListener("click", reset_board)
     for (let i=0; i<squares.length; i++){
         squares[i].classList.remove("×") //resets class lists 
         squares[i].classList.remove("⚬")
         squares[i].style.backgroundImage = ""
-        console.log(squares[i].classList)
     }
     check_turn()
 }
@@ -412,7 +410,7 @@ let player1_turn = () => {
     player1_score[1].style.color = "white"
 
     player2_score[0].style.color = "#8a8a8a"
-    player2_score[0].style.color = "#8a8a8a"
+    player2_score[1].style.color = "#8a8a8a"
 
     add_square_listeners(set_square_contents)
 }
@@ -425,7 +423,7 @@ let player2_turn = () => {
     player2_score[1].style.color = "white"
 
     player1_score[0].style.color = "#8a8a8a"
-    player1_score[0].style.color = "#8a8a8a"
+    player1_score[1].style.color = "#8a8a8a"
 
     add_square_listeners(set_player2_square)
 }
