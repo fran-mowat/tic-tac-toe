@@ -311,8 +311,7 @@ let reset_board = () => {
 
     board.removeEventListener("click", reset_board)
     for (let i=0; i<squares.length; i++){
-        squares[i].classList.remove("×") //resets class lists 
-        squares[i].classList.remove("⚬")
+        squares[i].classList = "board-square"
         squares[i].style.backgroundImage = ""
     }
     check_turn()
@@ -497,5 +496,5 @@ let switch_mode = () => {
     }
 }
 
-round()
+check_turn()
 
