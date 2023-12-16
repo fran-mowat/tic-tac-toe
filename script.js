@@ -9,6 +9,9 @@ let set_square_contents = (e) => {
     if (check_board() == -1 && document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //winner is not found on board 
         setTimeout(computer_turn, 400) //delay computer move by 400ms
     } else{
+        for (let i = 0; i < squares.length; i++){
+            squares[i].removeEventListener("click", set_square_contents)
+        }
         player2_turn()
     }
 }
@@ -17,6 +20,9 @@ let set_player2_square = (e) => {
     e.target.className = "board-square ⚬"
     remove_square_listeners(set_player2_square)
     if (check_board() == -1){ //winner is not found on board 
+        for (let i = 0; i < squares.length; i++){
+            squares[i].removeEventListener("click", set_player2_square)
+        }
         player1_turn()
     }
 }
@@ -320,9 +326,15 @@ let reset_board = () => {
 let board_click = () => {
     let board = document.getElementById("board")
     board.addEventListener("click", reset_board)
+
+    for (let i=0; i<squares.length; i++){
+        squares[i].removeEventListener("click", set_square_contents)
+        squares[i].removeEventListener("click", set_player2_square)
+    }
 }
 
 let winner = (winner, pos1=0, pos2=0, pos3=0) => {
+    
     if (winner == "user"){
         let user_score = document.getElementById("player-number")
         user_score.innerHTML = Number(user_score.innerHTML) + 1
@@ -411,7 +423,11 @@ let player1_turn = () => {
     player2_score[0].style.color = "#8a8a8a"
     player2_score[1].style.color = "#8a8a8a"
 
-    add_square_listeners(set_square_contents)
+    for (let i=0; i<squares.length; i++){
+        if ((!squares[i].classList.contains("⚬")) && (!squares[i].classList.contains("×"))){ //checking that the square does not already contain an element
+            squares[i].addEventListener("click", set_square_contents)
+        }
+    }
 }
 
 let player2_turn = () => {
@@ -424,7 +440,11 @@ let player2_turn = () => {
     player1_score[0].style.color = "#8a8a8a"
     player1_score[1].style.color = "#8a8a8a"
 
-    add_square_listeners(set_player2_square)
+    for (let i=0; i<squares.length; i++){
+        if ((!squares[i].classList.contains("⚬")) && (!squares[i].classList.contains("×"))){ //checking that the square does not already contain an element
+            squares[i].addEventListener("click", set_player2_square)
+        }
+    }
 }
 
 let two_player = () => {
@@ -437,7 +457,11 @@ let two_player = () => {
 }
 
 let player_turn_1P = () => {
-    add_square_listeners(set_square_contents)
+    for (let i=0; i<squares.length; i++){
+        if ((!squares[i].classList.contains("⚬")) && (!squares[i].classList.contains("×"))){ //checking that the square does not already contain an element
+            squares[i].addEventListener("click", set_square_contents)
+        }
+    }
 }
 
 let round = () => {
