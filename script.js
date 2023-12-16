@@ -8,7 +8,7 @@ let set_square_contents = (e) => {
     remove_square_listeners(set_square_contents)
     if (check_board() == -1 && document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //winner is not found on board 
         setTimeout(computer_turn, 400) //delay computer move by 400ms
-    } else{
+    } else if (document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER 1 (X)"){
         for (let i = 0; i < squares.length; i++){
             squares[i].removeEventListener("click", set_square_contents)
         }
@@ -557,15 +557,6 @@ let switch_mode = () => {
         mode.classList.remove("two-player")
         mode.classList.add("one-player")
         mode.children[1].innerHTML = "2P"
-
-        computer_score.style.color = "white"
-        document.getElementById("computer-score").children[1].style.color = "white"
-
-        document.getElementById("tie-score").children[0].style.color = "white"
-        document.getElementById("tie-score").children[1].style.color = "white"
-
-        player_score.style.color = "white"
-        document.getElementById("player-score").children[1].style.color = "white"
 
         round_number = 0
         setTimeout(round, 200)
