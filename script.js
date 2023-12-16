@@ -498,6 +498,15 @@ let player_turn_1P = () => {
 }
 
 let round = () => {
+    document.getElementById("player-score").children[0].style.color = "white"
+    document.getElementById("player-score").children[1].style.color = "white"
+
+    document.getElementById("tie-score").children[0].style.color = "white"
+    document.getElementById("tie-score").children[1].style.color = "white"
+
+    document.getElementById("computer-score").children[0].style.color = "white"
+    document.getElementById("computer-score").children[1].style.color = "white"
+
     if (round_number % 2 == 0){ //user turn 
         round_number += 1 //global variable 
         player_turn_1P()
