@@ -334,18 +334,51 @@ let board_click = () => {
 }
 
 let winner = (winner, pos1=0, pos2=0, pos3=0) => {
-    
+    let user_score = document.getElementById("player-score").children
+    let computer_score = document.getElementById("computer-score").children
+    let tie_score = document.getElementById("tie-score").children
+
     if (winner == "user"){
-        let user_score = document.getElementById("player-number")
-        user_score.innerHTML = Number(user_score.innerHTML) + 1
+        user_score[1].innerHTML = Number(user_score[1].innerHTML) + 1
+
+        user_score[0].style.color = "white" //setting colour of winner to white and remainder to grey 
+        user_score[1].style.color = "white"
+
+        computer_score[0].style.color = "#8a8a8a"
+        computer_score[1].style.color = "#8a8a8a"
+        
+        tie_score[0].style.color = "#8a8a8a"
+        tie_score[1].style.color = "#8a8a8a"
+
         winner_flash("user", pos1, pos2, pos3)
+
     } else if (winner == "computer"){
-        let computer_score = document.getElementById("computer-number")
-        computer_score.innerHTML = Number(computer_score.innerHTML) + 1
+        console.log("computer win")
+        computer_score[1].innerHTML = Number(computer_score[1].innerHTML) + 1
+
+        computer_score[0].style.color = "white" //setting colour of winner to white and remainder to grey 
+        computer_score[1].style.color = "white"
+
+        user_score[0].style.color = "#8a8a8a"
+        user_score[1].style.color = "#8a8a8a"
+        
+        tie_score[0].style.color = "#8a8a8a"
+        tie_score[1].style.color = "#8a8a8a"
+
         winner_flash("computer", pos1, pos2, pos3)
+
     } else if (winner == "draw"){
-        let tie_score = document.getElementById("tie-number")
-        tie_score.innerHTML = Number(tie_score.innerHTML) + 1
+        tie_score[1].innerHTML = Number(tie_score[1].innerHTML) + 1
+
+        tie_score[0].style.color = "white" //setting colour of winner to white and remainder to grey 
+        tie_score[1].style.color = "white"
+
+        user_score[0].style.color = "#8a8a8a"
+        user_score[1].style.color = "#8a8a8a"
+        
+        computer_score[0].style.color = "#8a8a8a"
+        computer_score[1].style.color = "#8a8a8a"
+
         winner_flash("draw")
     }
 
@@ -502,8 +535,8 @@ let switch_mode = () => {
         document.getElementById("tie-score").children[0].style.color = "#8a8a8a"
         document.getElementById("tie-score").children[1].style.color = "#8a8a8a"
         
-        setTimeout(player1_turn, 200)
         player_turn = 0 
+        setTimeout(player1_turn, 200)
 
     } else{ //swapping into 1P mode 
         player_score.innerHTML = "PLAYER"
