@@ -534,6 +534,9 @@ let switch_mode = () => {
 
         document.getElementById("tie-score").children[0].style.color = "#8a8a8a"
         document.getElementById("tie-score").children[1].style.color = "#8a8a8a"
+
+        document.getElementById("computer-score").children[0].style.color = "#8a8a8a"
+        document.getElementById("computer-score").children[1].style.color = "#8a8a8a"
         
         player_turn = 0 
         setTimeout(player1_turn, 200)
