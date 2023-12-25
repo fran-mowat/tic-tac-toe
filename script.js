@@ -225,6 +225,7 @@ let computer_turn = () => {
     - looks to make 3 in a row for computer 
     - looks to stop 3 in a row for user 
     - looks to make 2 in a row for computer 
+    - looks to select corner square 
     - selects a random square  
      */
     
@@ -269,6 +270,21 @@ let computer_turn = () => {
             if (check_empty() == false){ //checks that there is at least 1 computer piece on the board  
                 if (double_xs() == true){ //looks to make two in a row for the computer 
                     valid_move = true 
+                }
+            }
+        }
+
+        if (valid_move == false){
+            let choice = Math.floor(Math.random() * 4) 
+            let corners = [0, 2, 6, 8]
+            while (corners.length > 0){
+                corner = corners[choice]
+                if (squares[corner].classList == "board-square"){
+                    squares[corner].classList.add("⚬")
+                    valid_move = true 
+                    corners = []
+                } else{
+                    corners.splice(choice, 1)
                 }
             }
         }
