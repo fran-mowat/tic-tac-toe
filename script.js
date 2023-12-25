@@ -6,13 +6,16 @@ let player_turn = 0
 let set_square_contents = (e) => {
     e.target.className = "board-square ×"
     remove_square_listeners(set_square_contents)
-    if (check_board() == -1 && document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //winner is not found on board 
+    board_result = check_board()
+    if (board_result == -1 && document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){ //winner is not found on board 
         setTimeout(computer_turn, 400) //delay computer move by 400ms
     } else if (document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER 1 (X)"){
         for (let i = 0; i < squares.length; i++){
             squares[i].removeEventListener("click", set_square_contents)
         }
-        player2_turn()
+        if (board_result == -1){
+            player2_turn() //only moves to next round if no winner is present 
+        }
     }
 }
 
