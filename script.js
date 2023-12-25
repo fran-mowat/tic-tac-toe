@@ -14,7 +14,7 @@ let set_square_contents = (e) => {
             squares[i].removeEventListener("click", set_square_contents)
         }
         if (board_result == -1){
-            player2_turn() //only moves to next round if no winner is present 
+            player2_turn() //only moves to next round if no winner is present
         }
     }
 }
@@ -323,6 +323,7 @@ let reset_board = () => {
         squares[i].className = "board-square"
         squares[i].style.backgroundImage = ""
     }
+
     check_turn()
 }
 
@@ -451,9 +452,13 @@ let winner_flash = (winner, pos1=0, pos2=0, pos3=0) => {
 let player1_turn = () => {
     let player1_score = document.getElementById("player-score").children
     let player2_score = document.getElementById("computer-score").children
+    let tie_score = document.getElementById("tie-score").children
 
     player1_score[0].style.color = "white"
     player1_score[1].style.color = "white"
+
+    tie_score[0].style.color = "#8a8a8a"
+    tie_score[1].style.color = "#8a8a8a"
 
     player2_score[0].style.color = "#8a8a8a"
     player2_score[1].style.color = "#8a8a8a"
@@ -468,9 +473,13 @@ let player1_turn = () => {
 let player2_turn = () => {
     let player1_score = document.getElementById("player-score").children
     let player2_score = document.getElementById("computer-score").children
+    let tie_score = document.getElementById("tie-score").children
 
     player2_score[0].style.color = "white"
     player2_score[1].style.color = "white"
+
+    tie_score[0].style.color = "#8a8a8a"
+    tie_score[1].style.color = "#8a8a8a"
 
     player1_score[0].style.color = "#8a8a8a"
     player1_score[1].style.color = "#8a8a8a"
@@ -527,7 +536,6 @@ let check_turn = () => {
 }
 
 let switch_mode = () => {
-    reset_board()
     document.getElementById("player-number").innerHTML = 0
     document.getElementById("tie-number").innerHTML = 0
     document.getElementById("computer-number").innerHTML = 0
@@ -535,6 +543,14 @@ let switch_mode = () => {
     let player_score = document.getElementById("player-score").firstElementChild
     let computer_score = document.getElementById("computer-score").firstElementChild
     let mode = document.getElementById("game-mode")
+
+    remove_square_listeners(set_square_contents)
+    remove_square_listeners(set_player2_square)
+
+    for (let i=0; i<squares.length; i++){
+        squares[i].className = "board-square"
+        squares[i].style.backgroundImage = ""
+    }
 
     if (player_score.innerHTML == "PLAYER"){ //swapping into 2P mode
         player_score.innerHTML = "PLAYER 1 (X)"
