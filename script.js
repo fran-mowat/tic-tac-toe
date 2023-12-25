@@ -356,7 +356,6 @@ let winner = (winner, pos1=0, pos2=0, pos3=0) => {
         winner_flash("user", pos1, pos2, pos3)
 
     } else if (winner == "computer"){
-        console.log("computer win")
         computer_score[1].innerHTML = Number(computer_score[1].innerHTML) + 1
 
         computer_score[0].style.color = "white" //setting colour of winner to white and remainder to grey 
