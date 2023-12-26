@@ -280,11 +280,11 @@ let find_adjacent = (i) => {
 let double_os = () => {
     let valid_move = false 
 
-    if (double_o_diagonal() == true){
+    if (double_o_row() == true){
         valid_move = true
-    } else if (double_o_row() == true){
-        valid_move = true 
     } else if (double_o_column() == true){
+        valid_move = true 
+    } else if (double_o_diagonal() == true){
         valid_move = true 
     }
     return valid_move
