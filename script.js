@@ -225,6 +225,7 @@ let computer_turn = () => {
     - looks to make 3 in a row for computer 
     - looks to stop 3 in a row for user 
     - looks to make 2 in a row for computer 
+    - looks to select middle square 
     - looks to select corner square 
     - selects a random square  
      */
@@ -271,6 +272,13 @@ let computer_turn = () => {
                 if (double_xs() == true){ //looks to make two in a row for the computer 
                     valid_move = true 
                 }
+            }
+        }
+
+        if (valid_move == false){
+            if (squares[4].classList == "board-square"){
+                squares[4].classList.add("⚬")
+                valid_move = true 
             }
         }
 
