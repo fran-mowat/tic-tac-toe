@@ -451,7 +451,7 @@ let winner_flash = (winner, pos1=0, pos2=0, pos3=0) => {
         i = setInterval(change_colour, 200)
         setTimeout(function() {clearInterval(i)
         }, 1200)
-        board.style.backgroundColor = "white"
+        setTimeout(function() {board.style.backgroundColor = "white"}, 1200)
     } else if (winner == "user"){
         i = setInterval(change_cross_colour, 200, pos1, pos2, pos3)
         setTimeout(function() {clearInterval(i)
