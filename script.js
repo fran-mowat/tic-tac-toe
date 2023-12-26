@@ -180,6 +180,79 @@ let check_empty = () => {
     return true //board is empty 
 }
 
+let double_o_column = () => {
+    for (let i = 0; i<3; i++){
+        if ((squares[i].classList.contains("⚬")) && (squares[i+3].classList == "board-square") && (squares[i+6].classList == "board-square")){
+            if (computer_move(i+6)){
+                return true 
+            }
+        }
+        else if ((squares[i+3].classList.contains("⚬")) && (squares[i].classList == "board-square") && (squares[i+6].classList == "board-square")){
+            if (computer_move(i)){
+                return true 
+            }
+        }
+        else if ((squares[i+6].classList.contains("⚬")) && (squares[i].classList == "board-square") && (squares[i+3].classList == "board-square")){
+            if (computer_move(i)){
+                return true 
+            }
+        }
+    }
+}
+
+let double_o_diagonal = () => {
+    if ((squares[0].classList.contains("⚬")) && (squares[4].classList == "board-square") && (squares[8].classList == "board-square")){
+        if (computer_move(4)){
+            return true 
+        }
+    }
+    else if ((squares[4].classList.contains("⚬")) && (squares[0].classList == "board-square") && (squares[8].classList == "board-square")){
+        if (computer_move(0)){
+            return true 
+        }
+    }
+    else if ((squares[8].classList.contains("⚬")) && (squares[0].classList == "board-square") && (squares[4].classList == "board-square")){
+        if (computer_move(4)){
+            return true 
+        }
+    }
+    else if ((squares[2].classList.contains("⚬")) && (squares[4].classList == "board-square") && (squares[6].classList == "board-square")){    
+        if (computer_move(4)){
+                return true 
+            }
+    }
+    else if ((squares[4].classList.contains("⚬")) && (squares[2].classList == "board-square") && (squares[6].classList == "board-square")){
+        if (computer_move(2)){
+            return true 
+        }
+    }
+    else if ((squares[6].classList.contains("⚬")) && (squares[2].classList == "board-square") && (squares[4].classList == "board-square")){
+        if (computer_move(4)){
+            return true 
+        }
+    }
+}
+
+let double_o_row = () => {
+    for (let i=0; i<9; i+=3){
+        if ((squares[i].classList.contains("⚬")) && (squares[i+1].classList == "board-square") && (squares[i+2].classList == "board-square")){
+            if (computer_move(i+2)){
+                return true 
+            }
+        }
+        else if ((squares[i+1].classList.contains("⚬")) && (squares[i].classList == "board-square") && (squares[i+2].classList == "board-square")){
+            if (computer_move(i)){
+                return true 
+            }
+        }
+        else if ((squares[i+2].classList.contains("⚬")) && (squares[i].classList == "board-square") && (squares[i+1].classList == "board-square")){
+            if (computer_move(i)){
+                return true 
+            }
+        }
+    }
+}
+
 let find_adjacent = (i) => {
     if (i == 0){
         return [1,3]
@@ -204,30 +277,28 @@ let find_adjacent = (i) => {
     }
 }
 
-let double_xs = () => {
-    for (let i=0; i<9; i++){
-        if (squares[i].classList.contains("⚬")){
-            adjacent = find_adjacent(i) //returns list of adjacent squares to i
-            for (let j = 0; j < adjacent.length; j++){
-                val = adjacent[j] //iterating through adjacent list
-                if (computer_move(val)){
-                    return true 
-                }
-            }
-        }
+let double_os = () => {
+    let valid_move = false 
+
+    if (double_o_diagonal() == true){
+        valid_move = true
+    } else if (double_o_row() == true){
+        valid_move = true 
+    } else if (double_o_column() == true){
+        valid_move = true 
     }
-    return false 
+    return valid_move
 }
 
 let computer_turn = () => {
     /*
-     * computer 'intelligent' move rules:
-    - looks to make 3 in a row for computer 
-    - looks to stop 3 in a row for user 
-    - looks to make 2 in a row for computer 
-    - looks to select middle square 
-    - looks to select corner square 
-    - selects a random square  
+    computer 'intelligent' move rules:
+        - looks to make 3 in a row for computer 
+        - looks to stop 3 in a row for user 
+        - looks to make 2 in a row for computer 
+        - looks to select middle square 
+        - looks to select corner square 
+        - selects a random square  
      */
     
     if (document.getElementById("player-score").firstElementChild.innerHTML == "PLAYER"){
@@ -269,7 +340,7 @@ let computer_turn = () => {
 
         if (valid_move == false){
             if (check_empty() == false){ //checks that there is at least 1 computer piece on the board  
-                if (double_xs() == true){ //looks to make two in a row for the computer 
+                if (double_os() == true){ //looks to make two in a row for the computer 
                     valid_move = true 
                 }
             }
@@ -283,9 +354,9 @@ let computer_turn = () => {
         }
 
         if (valid_move == false){
-            let choice = Math.floor(Math.random() * 4) 
             let corners = [0, 2, 6, 8]
             while (corners.length > 0){
+                let choice = Math.floor(Math.random() * corners.length)
                 corner = corners[choice]
                 if (squares[corner].classList == "board-square"){
                     squares[corner].classList.add("⚬")
