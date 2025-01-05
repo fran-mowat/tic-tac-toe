@@ -5,19 +5,22 @@
 
 body{
     background-color: rgb(0, 0, 0);
+    margin: 0;
 }
 
 #title-card{
     text-align: center;
-    margin-top: 30px;
-    margin-bottom: 25px;
     font-size: 20px;
+}
+
+#title-card h1{
+    margin: 30px auto;
 }
 
 #board{
     margin: auto;
     height: 460px;
-    width: 460px;
+    width: max(min(50%, 500px), 300px);
     display: grid;
     gap: 5px;
     background-color: white;
@@ -29,8 +32,6 @@ body{
 }
 
 .board-square{
-    height: 150px;
-    width: 150px;
     background-color: rgb(0, 0, 0);
     display: inline-grid;
     grid-row-start: 1;
@@ -41,6 +42,14 @@ body{
     font-family: 'monospace', Arial, sans-serif;
     height: auto;
     width: auto;
+}
+
+.⚬, .×{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: black;
+    background-blend-mode: hard-light;
 }
 
 .⚬{
@@ -54,19 +63,15 @@ body{
 #score-card{
     display: flex;
     margin: auto;
-    width: 700px;
     font-size: 20px;
     margin-top: 2px;
+    gap: 40px;
+    justify-content: center;
 }
 
 #player-score, #tie-score, #computer-score, #game-mode, #empty-centre{
-    flex: 1;
     text-align: center;
     font-weight: 500;
-}
-
-#game-mode, #empty-centre{
-    width: 110px
 }
 
 .one-player:hover #logo{
