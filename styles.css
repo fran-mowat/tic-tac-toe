@@ -23,12 +23,14 @@ body{
     width: max(min(50%, 500px), 300px);
     display: grid;
     gap: 5px;
+    grid-template-rows: repeat(3, 1fr);
     background-color: white;
 }
 
 .board-row{
     display: grid;
     gap: 5px;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .board-square{
