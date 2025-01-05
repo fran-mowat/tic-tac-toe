@@ -65,11 +65,17 @@ body{
     margin: auto;
     font-size: 20px;
     margin-top: 2px;
-    gap: 40px;
+    gap: 25px;
     justify-content: center;
 }
 
-#player-score, #tie-score, #computer-score, #game-mode, #empty-centre{
+@media (min-width: 400px) {
+    #score-card{
+        gap: 40px;
+    }
+}
+
+#player-score, #tie-score, #computer-score, #game-mode{
     text-align: center;
     font-weight: 500;
 }
